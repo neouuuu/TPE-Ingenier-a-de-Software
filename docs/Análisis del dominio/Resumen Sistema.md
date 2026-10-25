@@ -14,10 +14,12 @@ El sistema debe recopilar información proveniente de servicios externos, permit
 - Gestionar manualmente las reservas, permitiendo agregarlas, actualizarlas o eliminarlas.
 - Configurar filtros y listas de remitentes de confianza para el procesamiento de correos electrónicos.
 - Compartir itinerarios con personas autorizadas.
+- Autorizar y revocar el acceso del sistema a su cuenta de correo electrónico.
+- Recibir notificaciones de los cambios relevantes en sus reservas.
 
 ### B. Reservas
 
-- Examinar correos electrónicos relacionados con viajes.
+- Obtener y examinar los correos electrónicos relacionados con viajes de las cuentas que el usuario autorizó (por consulta periódica o por notificación del proveedor, a definir en el diseño).
 - Extraer información de los correos y agregar las reservas correspondientes al itinerario.
 - Consultar las APIs de proveedores externos.
 - Reflejar las actualizaciones y cancelaciones de las reservas.
@@ -40,7 +42,7 @@ El sistema debe recopilar información proveniente de servicios externos, permit
 - Integrarse con proveedores de servicios de viaje y de correo electrónico.
 - Facilitar el contacto con la agencia de viajes preferida por el usuario.
 - Permitir compartir itinerarios mediante redes sociales.
-- Recopilar datos para analizar tendencias, destinos y cancelaciones.
+- Recopilar datos para que el equipo de análisis pueda analizar tendencias, destinos y cancelaciones.
 
 ## 3. Atributos de calidad y medidas explícitas
 
@@ -60,3 +62,5 @@ El sistema debe recopilar información proveniente de servicios externos, permit
 
 - Determinar qué proveedor de correo electrónico o de reservas se utilizará en el prototipo.
 - Identificar qué APIs reales estarán disponibles para la implementación del prototipo.
+- Decidir cómo se obtienen los correos nuevos: consulta periódica o notificaciones del proveedor.
+- Definir los canales de notificación al usuario y qué cambios se consideran relevantes.

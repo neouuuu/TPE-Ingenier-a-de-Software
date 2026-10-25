@@ -1,4 +1,4 @@
-# ADR-001: Gestión y asignación de reservas a viajes
+# ADR-007: Gestión y asignación de reservas a viajes
 
 - **Estado:** Aceptado
 - **Fecha:** 2026-10-15
@@ -69,7 +69,7 @@ Se descarta porque introduce una dependencia innecesaria entre registrar una res
 
 - **Requerimientos funcionales:** RF-01, RF-02, RF-03, RF-05 y RF-08.
 - **Casos de uso:** CU-01, CU-02, CU-03, CU-05 y CU-07.
-- **Reglas de negocio:** RN-01 a RN-05, relativas a la asociación y organización de reservas.
+- **Reglas de negocio:** RN-01 a RN-05, relativas a la asociación y organización de reservas (definidas en [Reglas de negocio](../../An%C3%A1lisis%20del%20dominio/Reglas%20de%20negocio.md)).
 
 ## Notas
 
