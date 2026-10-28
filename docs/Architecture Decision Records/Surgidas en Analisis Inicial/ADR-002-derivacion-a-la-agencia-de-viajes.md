@@ -1,32 +1,28 @@
-# ADR-002: Derivación indirecta a la agencia de viajes preferida
+# ADR-002: Integración técnica con la agencia de viajes preferida
 
-- **Estado:** Aceptado
-- **Fecha:** 2026-10-15
+- **Estado:** Aceptado como objetivo de diseño; API pendiente de validación
+- **Fecha:** 2026-10-28
 
 ## Contexto
-Trotamundos debe facilitar la resolución de problemas relacionados con los viajes mediante la agencia preferida del usuario. No se ha definido una API ni un mecanismo de integración técnica con la agencia. Se prioriza mantener acotado el alcance inicial.
+Trotamundos debe ayudar a resolver problemas de viaje a través de la agencia preferida del usuario. RF-15 pide integración técnica cuando exista una integración compatible. Todavía no se identificó la agencia concreta ni se verificó que exponga una API oficial con las operaciones necesarias.
 
-## Decisión
-Trotamundos facilitará los datos de contacto o la vía de contacto de la agencia preferida. El usuario se comunicará con ella mediante un canal externo. Por ahora no habrá integración técnica directa entre Trotamundos y la agencia.
+## Drivers
+RF-15; QA-I1 (interoperabilidad); QA-SE1 (acceso autorizado); CRN-05 (condiciones de terceros); CON-10 (APIs estándar).
 
 ## Alternativas consideradas
-- Integración técnica directa con la agencia.
-- Derivación indirecta del usuario.
-- No contemplar la agencia en el flujo del sistema.
+- Integración técnica directa mediante un adaptador, si existe una API compatible.
+- Derivación indirecta a un canal externo.
+- Excluir la agencia del flujo.
 
-Se elige la derivación indirecta por su menor complejidad y porque no requiere definir contratos o APIs de una agencia específica.
+## Decisión
+Diseñar una **integración técnica directa** detrás de un puerto/adaptador, con contrato interno desacoplado del proveedor. La implementación queda pendiente de la etapa 5, donde se verifican API oficial, autenticación, permisos, operaciones, cuotas y condiciones de uso.
+
+Si no existe una API viable, no se simulará una integración: se documentará el bloqueo y se revisará con el equipo/cátedra la alternativa de alcance. La derivación indirecta solo puede adoptarse mediante una decisión explícita posterior.
 
 ## Consecuencias
-### Positivas
-- Mantiene acotado el alcance.
-- Evita depender de una API no definida.
-- Permite al usuario contactar a su agencia preferida por un canal externo.
-
-### Costos y cuestiones pendientes
-- La resolución continúa fuera de Trotamundos.
-- El sistema no podrá intercambiar automáticamente los datos del caso ni conocer su estado mediante una integración.
-- Revisar esta decisión si se determina que el requisito de resolución de problemas exige una integración técnica directa.
+- La arquitectura contempla RF-15 sin acoplar el dominio a una agencia específica.
+- La viabilidad depende de capacidades y permisos de terceros.
+- Hasta validar la API, RF-15 no puede considerarse implementado ni completamente resuelto.
 
 ## Trazabilidad
-- Requisito funcional de resolución de problemas mediante la agencia preferida.
-- Decisión de limitar la integración técnica en el alcance inicial.
+RF-15; ADD-1/ADD-2; ADR-009; [etapa 5 de integraciones](../../../../ADD/05-Integraciones-pendientes.md).
