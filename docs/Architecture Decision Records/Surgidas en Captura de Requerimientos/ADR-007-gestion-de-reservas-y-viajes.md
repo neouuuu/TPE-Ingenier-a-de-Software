@@ -1,78 +1,33 @@
-# ADR-007: Gestión y asignación de reservas a viajes
+# ADR-007: Separar el registro de reservas de su asignación a viajes
 
 - **Estado:** Aceptado
-- **Fecha:** 2026-10-15
-- **Categoría:** Diseño funcional y modelo de dominio
+- **Fecha:** 2026-10-28
+- **Categoría:** Dominio y reglas funcionales
 
-## Contexto
+## Contexto y problema
+Una reserva puede registrarse manualmente o importarse desde correo antes de que exista el viaje correspondiente o antes de que pueda determinarse a qué viaje pertenece. Exigir una asignación inmediata o automática puede impedir el registro o crear asociaciones incorrectas.
 
-El sistema debe permitir al usuario registrar reservas manualmente, importarlas automáticamente desde correos electrónicos y organizarlas dentro de sus viajes.
-
-Sin embargo, una reserva puede incorporarse al sistema antes de que exista el viaje al que corresponde o antes de que el usuario determine esa asociación. Por este motivo, la incorporación de una reserva no puede depender obligatoriamente de su asignación inmediata a un viaje.
-
-Además, el sistema debe permitir consultar las reservas organizadas por viaje y facilitar la organización posterior de aquellas que todavía no estén asignadas.
-
-## Decisión
-
-Se adoptan las siguientes decisiones para la gestión de reservas:
-
-1. **Relación entre reservas y viajes:** una reserva puede estar asociada a cero o un viaje como máximo. Un viaje puede contener múltiples reservas, pero una reserva no puede pertenecer simultáneamente a varios viajes.
-
-2. **Registro manual:** el usuario puede registrar una reserva y asociarla opcionalmente a un viaje existente. También puede completar el registro sin realizar esa asociación.
-
-3. **Importación automática:** el sistema debe poder identificar y registrar reservas a partir de correos electrónicos sin exigir que estén asociadas previamente a un viaje. No debe establecer asociaciones que no estén justificadas por la información disponible.
-
-4. **Separación de responsabilidades:** la incorporación de una reserva y su organización dentro de un viaje son responsabilidades funcionales diferenciadas. El registro manual puede incluir una asignación opcional, pero esta no reemplaza la posibilidad de organizar la reserva posteriormente.
-
-5. **Gestión de reservas pendientes:** el sistema debe permitir identificar y consultar las reservas que no están asociadas a ningún viaje, para que el usuario pueda organizarlas posteriormente.
-
-6. **Asignación posterior:** el usuario puede asociar una reserva pendiente a un viaje existente o, cuando la funcionalidad de gestión de viajes lo permita, a un nuevo viaje. Toda asignación debe respetar la regla de asociación única.
+## Drivers
+RF-01/RF-02/RF-03/RF-05/RF-08; RN-01–RN-05; calidad y trazabilidad del modelo de dominio.
 
 ## Alternativas consideradas
+1. Exigir asignación a un viaje al registrar.
+2. Asignar automáticamente todas las reservas importadas.
+3. Permitir reservas sin asignar y asociación opcional a un único viaje.
+4. Permitir que una reserva pertenezca a varios viajes.
 
-### A. Exigir la asignación al registrar cada reserva
-
-Se descarta porque impide registrar reservas cuando el viaje correspondiente todavía no existe o no ha sido identificado.
-
-### B. Asignar automáticamente todas las reservas importadas
-
-Se descarta como comportamiento obligatorio porque la información de un correo puede ser insuficiente para determinar el viaje correcto, lo que podría generar asociaciones incorrectas.
-
-### C. Permitir que una reserva pertenezca a varios viajes
-
-Se descarta porque contradice la regla de dominio adoptada y podría producir inconsistencias al consultar y gestionar las reservas.
-
-### D. Unificar la incorporación y la organización en una única operación obligatoria
-
-Se descarta porque introduce una dependencia innecesaria entre registrar una reserva y organizarla. Se mantiene la posibilidad de realizar ambas acciones juntas en el registro manual cuando el usuario lo desee.
+## Decisión
+1. Una reserva se asocia a **cero o un viaje** como máximo.
+2. Un viaje puede contener múltiples reservas.
+3. El registro manual permite asociar un viaje opcionalmente.
+4. La importación puede crear una reserva sin asignar; no se asigna automáticamente salvo que la información disponible justifique la asociación.
+5. Las reservas sin asignar se pueden consultar y organizar posteriormente.
+6. Registrar y organizar son responsabilidades separadas, aunque la interfaz permita hacerlas en un mismo paso.
 
 ## Consecuencias
+**Beneficios:** admite importación temprana, evita asociaciones ambiguas y permite organizar progresivamente.
 
-### Positivas
-
-- Permite registrar reservas aunque el viaje correspondiente todavía no exista.
-- Permite importar reservas automáticamente sin exigir intervención inmediata del usuario.
-- Facilita la organización progresiva de los viajes.
-- Evita que una reserva quede asociada simultáneamente a varios viajes.
-- Mantiene diferenciadas las responsabilidades de incorporación y organización.
-- Permite identificar y gestionar las reservas que todavía no están asignadas.
-
-### Implicaciones para el diseño
-
-- El modelo de dominio debe representar la asociación con un viaje como opcional.
-- Las operaciones de registro, modificación y asignación deben validar la regla de asociación única.
-- Las consultas deben permitir recuperar las reservas de un viaje y las que permanecen sin asignar.
-- El procesamiento automático de correos debe poder finalizar aunque una reserva no tenga un viaje asociado.
-- La arquitectura deberá resolver estas responsabilidades de acuerdo con los drivers seleccionados durante las iteraciones ADD, sin presuponer de antemano una distribución concreta de componentes.
+**Costos/riesgos:** se necesita una vista de reservas sin asignar, validación transaccional de asociación única y reglas de deduplicación. La información insuficiente no debe generar una asociación inventada.
 
 ## Trazabilidad
-
-- **Requerimientos funcionales:** RF-01, RF-02, RF-03, RF-05 y RF-08.
-- **Casos de uso:** CU-01, CU-02, CU-03, CU-05 y CU-07.
-- **Reglas de negocio:** RN-01 a RN-05, relativas a la asociación y organización de reservas (definidas en [Reglas de negocio](../../An%C3%A1lisis%20del%20dominio/Reglas%20de%20negocio.md)).
-
-## Notas
-
-Este ADR documenta decisiones funcionales y de dominio. No determina todavía tecnologías, mecanismos de persistencia ni componentes arquitectónicos concretos.
-
-Las decisiones arquitectónicas que implementen estas reglas se documentarán en ADR posteriores cuando sean justificadas por los drivers arquitectónicamente significativos.
+RF-01/RF-02/RF-03/RF-05/RF-08; RN-01–RN-05; ADD-2; ADR-010/011.
