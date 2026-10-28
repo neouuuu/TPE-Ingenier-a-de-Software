@@ -16,6 +16,10 @@ Las integraciones externas concretas siguen pendientes de validación: el diseñ
 
 Se utiliza **ADD (Attribute-Driven Design)**. Las iteraciones 1 a 4 refinan la arquitectura a partir de sus drivers. La **iteración 5** concreta tecnologías y técnicas para un prototipo integrado de viabilidad, sin implicar que el stack sea definitivo para producción. La validación de APIs, permisos, cuotas, costos y contratos de terceros es una etapa previa separada.
 
+## Prototipo ejecutable
+
+- [Implementación del prototipo integrado](prototype/README.md): FastAPI, PostgreSQL, RabbitMQ, Outbox/Inbox, CQRS y simulador de proveedor hotelero.
+
 ## Documentación
 
 ### Análisis del dominio
