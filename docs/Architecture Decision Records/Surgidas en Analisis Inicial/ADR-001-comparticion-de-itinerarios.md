@@ -1,36 +1,31 @@
-# ADR-001: Compartición de itinerarios por correo y redes sociales
+# ADR-001: Compartir itinerarios por correo y redes sociales
 
 - **Estado:** Aceptado
-- **Fecha:** 2026-10-15
+- **Fecha:** 2026-10-28
+- **Categoría:** Seguridad e interoperabilidad
 
-## Contexto
-Trotamundos debe permitir compartir itinerarios y contemplar la interoperabilidad con proveedores de correo y redes sociales. Por correo, solo las personas designadas deben poder visualizar el itinerario. Se decidió que los destinatarios no necesitan una cuenta de Trotamundos y que compartir no habilita edición colaborativa.
+## Contexto y problema
+Trotamundos debe permitir compartir itinerarios con personas designadas y contempla interoperabilidad con redes sociales. Los destinatarios por correo pueden no tener una cuenta de Trotamundos. Compartir no debe habilitar edición colaborativa.
 
-## Decisión
-Se ofrecen dos modalidades:
-1. **Correo electrónico:** Trotamundos envía un enlace seguro al itinerario.
-2. **Redes sociales:** el usuario elige una sola red por publicación y Trotamundos solicita publicar el itinerario seleccionado.
-
-Los destinatarios por correo pueden consultar el itinerario sin registrarse y no pueden editarlo colaborativamente. El acceso debe restringirse a las personas designadas; el mecanismo concreto de autorización se definirá durante el diseño.
+## Drivers
+RF-23/RF-24; QA-SE2 (acceso limitado a destinatarios); QA-I3 (publicación social); requisitos de privacidad e interoperabilidad.
 
 ## Alternativas consideradas
-- Compartir solo por redes sociales.
-- Compartir solo por correo electrónico.
-- Ofrecer ambas modalidades.
+1. Compartición solo por correo.
+2. Publicación solo en redes sociales.
+3. Ambas modalidades: enlace privado por correo y publicación social explícita.
 
-Se elige ofrecer ambas para cubrir los modos de compartición contemplados en el alcance.
+## Decisión
+Ofrecer ambas modalidades:
+- **Correo:** enviar un enlace seguro de solo lectura al itinerario; el destinatario no necesita cuenta.
+- **Redes sociales:** permitir al usuario elegir la red y solicitar la publicación del itinerario seleccionado, sujeta a capacidades y permisos de esa plataforma.
+
+No se ofrece edición colaborativa. El mecanismo de verificación del destinatario, la caducidad y revocación del enlace se concretarán antes del prototipo.
 
 ## Consecuencias
-### Positivas
-- Los destinatarios pueden consultar un itinerario sin crear una cuenta.
-- Se cubren la compartición privada por correo y la publicación social.
-- Se evita ampliar el alcance con edición colaborativa.
+**Beneficios:** destinatarios sin cuenta pueden consultar el itinerario y se cubren dos formas de compartir.
 
-### Costos y cuestiones pendientes
-- Definir autorización de destinatarios, caducidad y revocación de enlaces.
-- La publicación social depende de las capacidades, permisos y políticas de la plataforma; su visibilidad también puede depender de su configuración.
-- Proteger los datos incluidos en el itinerario.
+**Costos/riesgos:** el enlace puede reenviarse; se requieren expiración, revocación, minimización de datos y autorización clara. La publicación depende de APIs, permisos y visibilidad de la plataforma.
 
 ## Trazabilidad
-- Requisitos de interoperabilidad con correo y redes sociales.
-- Requisito de privacidad: acceso limitado a personas designadas.
+RF-23/RF-24; QA-SE2/QA-I3; ADD-3; ADR-013.
