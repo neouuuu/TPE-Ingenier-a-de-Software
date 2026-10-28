@@ -57,19 +57,33 @@ Cada iteración incluye vistas y ADR propios cuando corresponda. Los diagramas d
 ├── README.md
 └── docs/
     ├── Análisis del dominio/
+    │   ├── Resumen Sistema.md
+    │   ├── Requerimientos funcionales.md
+    │   ├── Reglas de negocio.md
+    │   ├── Diagrama de Contexto.md
+    │   ├── Diagrama Casos de Uso.png
+    │   ├── Descriptores Casos de Uso.md
     │   └── Architecture Decision Records/
+    │       ├── README.md
+    │       ├── Surgidas en Analisis Inicial/          # ADR-001 a ADR-006
+    │       └── Surgidas en Captura de Requerimientos/ # ADR-007
     ├── Drivers/
+    │   ├── Tabla de Drivers.md
+    │   ├── Escenarios QA.md
+    │   ├── Utility Tree.md
+    │   ├── Restricciones.md
+    │   └── Preocupaciones.md
     └── ADD/
         ├── 00-Plan de iteraciones ADD.md
-        ├── 01-Iteracion-1/
-        ├── 02-Iteracion-2/
-        ├── 03-Iteracion-3/
-        ├── 04-Iteracion-4/
+        ├── 01-Iteracion-1/    # Alto nivel, vistas y ADR-008/009
+        ├── 02-Iteracion-2/    # Componentes funcionales, vistas y ADR-010/011
+        ├── 03-Iteracion-3/    # Resiliencia/seguridad, vistas y ADR-012/013
+        ├── 04-Iteracion-4/    # Analítica/recomendaciones, vistas y ADR-014/015
         ├── 05-Iteracion-5/
         │   ├── Iteracion-5.md
         │   ├── Vistas/Vista-CyC-Prototipo.md
         │   └── ADRs/ADR-016-stack-y-tecnicas-prototipo.md
-        └── 05-Integraciones-pendientes.md
+        └── 05-Integraciones-pendientes.md # Etapa previa, no una iteración ADD
 ```
 
 ## Estado actual
