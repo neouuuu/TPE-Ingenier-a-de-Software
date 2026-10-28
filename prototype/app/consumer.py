@@ -4,7 +4,7 @@ import pika
 from sqlalchemy import select
 from sqlalchemy.dialects.postgresql import insert as pg_insert
 from app.config import RABBITMQ_URL, RABBITMQ_QUEUE, RABBITMQ_DLQ
-from app.db import SessionLocal, init_db
+from app.db import SessionLocal
 from app.models import InboxEvent, ReservationRead
 
 def connect():
@@ -38,7 +38,6 @@ def handle_message(body: bytes) -> bool:
             return False
 
 def main():
-    init_db()
     while True:
         try:
             connection, channel = connect()
