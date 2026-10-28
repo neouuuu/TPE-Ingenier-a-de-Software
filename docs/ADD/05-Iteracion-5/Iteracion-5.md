@@ -6,7 +6,7 @@
 
 ## Propósito y criterio de diseño
 
-El prototipo debe aportar evidencia de que las decisiones arquitectónicas centrales pueden colaborar en un flujo realista: un proveedor turístico informa una reserva de hotel nueva, modificada o cancelada; Trotamundos valida y procesa la notificación; el cambio se propaga de forma asíncrona; y una consulta devuelve el estado actualizado.
+Esta iteración refina la arquitectura de Trotamundos como sistema completo y, para validarla sin implementar todas las funcionalidades, define un prototipo vertical representativo. El prototipo debe aportar evidencia de que las decisiones arquitectónicas centrales pueden colaborar en un flujo realista: un proveedor turístico informa una reserva de hotel nueva, modificada o cancelada; Trotamundos valida y procesa la notificación; el cambio se propaga de forma asíncrona; y una consulta devuelve el estado actualizado.
 
 No se busca implementar todas las funcionalidades del producto ni demostrar capacidad de producción. Se prioriza un flujo integrado y pruebas de comportamiento ante duplicados y fallos.
 
@@ -31,6 +31,21 @@ No se busca implementar todas las funcionalidades del producto ni demostrar capa
 7. API de consulta del itinerario.
 8. Política de reintentos, DLQ y reprocesamiento controlado.
 9. Configuración local reproducible y pruebas automatizadas.
+
+## Mapa de refinamiento del sistema completo
+
+ADD-5 no redefine los límites funcionales de ADD-1 a ADD-4: los concreta hasta el nivel de implementación cuando ya existe una decisión y deja explícito qué permanece sin seleccionar.
+
+| Subsistema del sistema objetivo | Concreción en ADD-5 | Límite del prototipo |
+|---|---|---|
+| Clientes web y móvil | Consumen APIs mediante contratos HTTP; se mantiene la separación cliente/backend. | No se selecciona framework frontend porque no es necesario para validar el flujo de eventos. La consulta puede probarse por HTTP. |
+| API y dominio | Python + FastAPI para el prototipo, con módulos internos para reservas y consultas. | Los módulos lógicos no se convierten automáticamente en microservicios independientes. |
+| Identidad de usuarios | Se conserva como responsabilidad arquitectónica separada, según ADD-1/ADD-3. | No se elige proveedor de identidad ni se pretende validar todo el inicio de sesión. HMAC autentica al emisor del webhook, no a los usuarios finales. |
+| Reservas y persistencia | PostgreSQL, modelo de escritura y proyección de lectura en tablas separadas. | Un solo motor en el prototipo; la topología productiva queda abierta. |
+| Comunicación interna | RabbitMQ, Transactional Outbox, Inbox, reintentos limitados y DLQ. | Se implementa el flujo de actualización de reserva de hotel como corte vertical de validación. |
+| Integraciones externas | Puertos/adaptadores desacoplados y contratos propios versionados. | Se usa un simulador independiente de proveedor de hoteles. Correo, agencia, mapas, redes sociales y canales de notificación siguen sujetos a la etapa previa de validación de APIs. |
+| Analítica y recomendaciones | Se mantienen como subsistemas lógicos desacoplados definidos en ADD-4. | No se seleccionan motor analítico, algoritmo ni framework de recomendación en este prototipo; no son necesarios para validar el flujo central. |
+| Despliegue y validación | Docker Compose local, Pytest y exploración HTTP manual. | No se considera una topología de producción ni una prueba de escala o multirregión. |
 
 ## Decisiones de implementación para el prototipo
 
