@@ -1,66 +1,43 @@
 # Trotamundos: descripción del sistema y requerimientos
 
-## 1. Descripción del sistema
+## 1. Descripción
 
-Trotamundos es una plataforma web y móvil que centraliza las reservas de viaje de cada usuario en un único lugar, incluyendo hoteles, automóviles, vuelos, trenes y autobuses.
+Trotamundos es una plataforma web y móvil que centraliza las reservas de viaje de cada usuario (hoteles, automóviles, vuelos, trenes y autobuses), permite registrar reservas manualmente, las organiza en viajes y refleja actualizaciones de fuentes externas.
 
-El sistema debe recopilar información proveniente de servicios externos, permitir la gestión manual de reservas y organizar los viajes durante todo su ciclo de vida.
+## 2. Capacidades funcionales
 
-## 2. Requerimientos funcionales
+- **Viajes y reservas:** consultar, registrar, actualizar, eliminar y asignar reservas; una reserva pertenece a cero o un viaje y puede quedar sin asignar.
+- **Correo:** acceder solo con autorización expresa; aplicar filtros y remitentes confiables; detectar correos de viaje y extraer reservas.
+- **Proveedores turísticos:** consultar detalles, actualizaciones y cancelaciones mediante APIs compatibles.
+- **Agencia preferida:** RF-15 requiere diseñar integración técnica directa mediante API cuando exista una interfaz oficial compatible. API y viabilidad pendientes de la etapa 5; no se asume que exista.
+- **Notificaciones:** informar al usuario cambios relevantes después de reflejarlos en el itinerario.
+- **Compartición:** enlace seguro por correo a destinatarios específicos, que pueden no tener cuenta; solo lectura. También se contempla publicar en una red social elegida.
+- **Analítica:** permitir al equipo autorizado analizar tendencias, destinos y cancelaciones, incluyendo consultas pesadas.
+- **Recomendaciones:** usar historial y preferencias para sugerir alojamiento, transporte y rutas; permitir aceptar o ajustar sugerencias y usar las interacciones para evaluar mejoras.
+- **Mapas:** integrar un servicio externo para ubicaciones y rutas; el proveedor está pendiente.
 
-### A. Usuarios
+## 3. Atributos de calidad y metas del enunciado
 
-- Consultar sus viajes y reservas.
-- Gestionar manualmente las reservas, permitiendo agregarlas, actualizarlas o eliminarlas.
-- Configurar filtros y listas de remitentes de confianza para el procesamiento de correos electrónicos.
-- Compartir itinerarios con personas autorizadas.
-- Autorizar y revocar el acceso del sistema a su cuenta de correo electrónico.
-- Recibir notificaciones de los cambios relevantes en sus reservas.
-
-### B. Reservas
-
-- Obtener y examinar los correos electrónicos relacionados con viajes de las cuentas que el usuario autorizó (por consulta periódica o por notificación del proveedor, a definir en el diseño).
-- Extraer información de los correos y agregar las reservas correspondientes al itinerario.
-- Consultar las APIs de proveedores externos.
-- Reflejar las actualizaciones y cancelaciones de las reservas.
-
-### C. Viajes
-
-- Agrupar las reservas por viaje.
-- Mantener actualizada la información del itinerario.
-- Archivar los viajes completados o retirarlos de la vista principal.
-
-### D. Sistema de recomendación
-
-- Analizar el historial de viajes y las preferencias de los usuarios.
-- Sugerir alternativas de alojamiento, transporte o rutas.
-- Permitir que los usuarios acepten las sugerencias o ajusten los parámetros de recomendación.
-- Utilizar las interacciones de los usuarios para refinar las recomendaciones futuras.
-
-### E. Integraciones y servicios complementarios
-
-- Integrarse con proveedores de servicios de viaje y de correo electrónico.
-- Facilitar el contacto con la agencia de viajes preferida por el usuario.
-- Permitir compartir itinerarios mediante redes sociales.
-- Recopilar datos para que el equipo de análisis pueda analizar tendencias, destinos y cancelaciones.
-
-## 3. Atributos de calidad y medidas explícitas
-
-| Atributo | Medida o condición |
+| Atributo | Meta/condición |
 |---|---|
-| Rendimiento web | Tiempo de respuesta de 800 ms. |
-| Rendimiento móvil | First Contentful Paint (FCP) inferior a 1,4 segundos. |
-| Frescura de los datos | Mostrar las actualizaciones dentro de los 5 minutos posteriores a su generación por la fuente externa. |
-| Disponibilidad | Máximo de 5 minutos de inactividad no planificada por mes. |
-| Escalabilidad | Soportar 15 millones de cuentas y 2 millones de usuarios activos semanales, contemplando picos de tráfico. |
-| Interoperabilidad | Integración mediante APIs con proveedores de viajes, proveedores de correo electrónico y redes sociales. |
-| Seguridad y privacidad | Garantizar el acceso seguro a los correos electrónicos y controlar quién puede visualizar los itinerarios compartidos. |
-| Evolucionabilidad | Facilitar la incorporación futura de nuevos medios de transporte, manteniendo la trazabilidad mediante ADR y contratos. |
-| Usabilidad e internacionalización | Ofrecer una interfaz enriquecida, capacidades móviles nativas —como GPS— y preparación para operar en múltiples regiones. |
+| Rendimiento web | Respuesta objetivo de 800 ms. |
+| Rendimiento móvil | First Contentful Paint (FCP) menor a 1,4 s. |
+| Frescura | Mostrar cambios dentro de los 5 minutos posteriores a su generación por la fuente externa, cuando esta los exponga oportunamente. |
+| Disponibilidad | Máximo de 5 minutos de indisponibilidad no planificada por mes. |
+| Escala | 15 millones de cuentas y 2 millones de usuarios activos semanales; contemplar picos. |
+| Interoperabilidad | APIs estándar de correo, proveedores turísticos, agencia si está disponible y redes sociales. |
+| Seguridad/privacidad | Acceso autorizado y revocable al correo; control de acceso a itinerarios y datos analíticos. |
+| Evolución | Incorporar transportes/proveedores nuevos con contratos y trazabilidad mediante ADR. |
+| UX/globalización | Interfaz enriquecida, capacidades móviles como GPS e infraestructura preparada para múltiples regiones. |
 
-## 4. Cuestiones pendientes de definición
+## 4. Pendientes relevantes para el diseño
 
-- Determinar qué proveedor de correo electrónico o de reservas se utilizará en el prototipo.
-- Identificar qué APIs reales estarán disponibles para la implementación del prototipo.
-- Decidir cómo se obtienen los correos nuevos: consulta periódica o notificaciones del proveedor.
-- Definir los canales de notificación al usuario y qué cambios se consideran relevantes.
+- Seleccionar APIs concretas para correo, proveedores turísticos, agencia, mapas y redes sociales.
+- Validar cuotas, permisos, verificación de aplicación, costos y términos de uso.
+- Definir política de deduplicación y precedencia cuando una edición manual compite con un cambio externo.
+- Definir caducidad/revocación y verificación del destinatario de enlaces compartidos.
+- Definir canales de notificación, residencia regional de datos y alcance vertical del prototipo.
+
+## 5. Decisiones de diseño que no deben confundirse con requisitos
+
+Se prefieren webhooks/notificaciones externas cuando el proveedor los ofrece; la consulta periódica es alternativa cuando no existe un mecanismo adecuado. El procesamiento por eventos dentro de Trotamundos no implica que todos los proveedores externos sean capaces de publicar eventos. La arquitectura lógica no obliga a desplegar cada módulo como microservicio.
