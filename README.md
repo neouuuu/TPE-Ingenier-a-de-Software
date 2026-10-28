@@ -26,7 +26,8 @@ Las cuatro iteraciones son el proceso de diseño arquitectónico. La etapa 5 es 
 - [Requerimientos funcionales](docs/An%C3%A1lisis%20del%20dominio/Requerimientos%20funcionales.md)
 - [Reglas de negocio](docs/An%C3%A1lisis%20del%20dominio/Reglas%20de%20negocio.md)
 - [Diagrama de contexto](docs/An%C3%A1lisis%20del%20dominio/Diagrama%20de%20Contexto.md)
-- [Diagrama y descriptores de casos de uso](docs/An%C3%A1lisis%20del%20dominio/Descriptores%20Casos%20de%20Uso.md)
+- [Diagrama de casos de uso](docs/An%C3%A1lisis%20del%20dominio/Diagrama%20Casos%20de%20Uso.png)
+- [Descriptores de casos de uso](docs/An%C3%A1lisis%20del%20dominio/Descriptores%20Casos%20de%20Uso.md)
 - [Índice de ADR del análisis del dominio](docs/An%C3%A1lisis%20del%20dominio/Architecture%20Decision%20Records/README.md)
 
 ### Drivers arquitectónicos
@@ -59,6 +60,7 @@ Cada iteración incluye sus vistas arquitectónicas y ADR propios. Los diagramas
     │   ├── Requerimientos funcionales.md
     │   ├── Reglas de negocio.md
     │   ├── Diagrama de Contexto.md
+    │   ├── Diagrama Casos de Uso.png
     │   ├── Descriptores Casos de Uso.md
     │   └── Architecture Decision Records/
     │       ├── README.md
