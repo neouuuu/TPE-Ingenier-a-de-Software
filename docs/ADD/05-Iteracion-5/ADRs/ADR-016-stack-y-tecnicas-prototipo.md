@@ -6,7 +6,7 @@
 
 ## Contexto
 
-Las iteraciones ADD-1 a ADD-4 definen la arquitectura lógica de Trotamundos, pero todavía hace falta comprobar las decisiones principales mediante un flujo ejecutable. Se necesita un prototipo local que reciba actualizaciones externas, las procese asíncronamente y las refleje en una consulta, con fallos reproducibles.
+Las iteraciones ADD-1 a ADD-4 definen la arquitectura lógica de Trotamundos. ADD-5 refina el sistema completo hasta un nivel implementable, seleccionando tecnologías para un prototipo integrado y explicitando los subsistemas cuya tecnología concreta queda abierta. Hace falta comprobar las decisiones principales mediante un flujo ejecutable. Se necesita un prototipo local que reciba actualizaciones externas, las procese asíncronamente y las refleje en una consulta, con fallos reproducibles.
 
 ## Drivers
 
@@ -17,6 +17,16 @@ RF-11–RF-15; RF-01/RF-05; QA-P1; QA-SE1/QA-SE2; QA-A1; CRN-05/06/07/08/12/13.
 - Construir toda la aplicación y sus clientes antes de validar los flujos internos.
 - Usar una cola simulada y almacenamiento en memoria para reducir trabajo.
 - Implementar un flujo integrado acotado con tecnologías concretas y servicios reproducibles localmente.
+
+## Alcance del sistema y del prototipo
+
+La iteración refina el sistema completo, pero el prototipo ejecutable se limita a un flujo vertical de reservas para probar la arquitectura de eventos. Las decisiones siguientes son concretas para ese prototipo; no fuerzan tecnologías no elegidas para clientes web/móvil, proveedor de identidad, analítica o recomendación.
+
+- Los clientes web/móvil continúan separados del backend y consumen contratos HTTP; el framework de frontend queda sin seleccionar.
+- La identidad de usuarios continúa siendo una responsabilidad separada. HMAC autentica webhooks de proveedor y no reemplaza la autenticación/autorización de usuarios.
+- Los módulos de dominio definidos en ADD-1/ADD-2 se conservan como límites lógicos; no se exige desplegar cada uno como microservicio.
+- Las integraciones de correo, agencia, mapas, redes sociales y notificaciones continúan detrás de adaptadores y sujetas a validación externa. El prototipo usa únicamente el simulador de hoteles.
+- Analítica y recomendación conservan su separación lógica de ADD-4; sus motores concretos quedan fuera de este prototipo.
 
 ## Decisión
 
