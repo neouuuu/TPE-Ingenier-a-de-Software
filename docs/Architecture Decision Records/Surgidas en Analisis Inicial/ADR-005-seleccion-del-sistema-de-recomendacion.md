@@ -1,35 +1,26 @@
-# ADR-005: Selección del módulo avanzado de sistema de recomendación
+# ADR-005: Seleccionar el sistema de recomendación como módulo avanzado
 
 - **Estado:** Aceptado
-- **Fecha:** 2026-10-15
+- **Fecha:** 2026-10-28
+- **Categoría:** Alcance funcional
 
-## Contexto
-La consigna requiere seleccionar e incorporar al menos uno de los módulos funcionales avanzados. La opción A consiste en un sistema que analiza el historial y las preferencias de los usuarios para sugerir alternativas de alojamiento, transporte o rutas. También requiere un esquema *human-in-the-loop*: los usuarios pueden aceptar sugerencias o ajustar parámetros para refinar el modelo.
+## Contexto y problema
+La consigna exige incorporar al menos un módulo avanzado. La opción A analiza historial y preferencias para sugerir alternativas de alojamiento, transporte y rutas; contempla interacción humana para aceptar o ajustar recomendaciones.
 
-## Decisión
-Trotamundos incorporará la **Opción A: Sistema de recomendación**.
-
-El módulo analizará el historial y las preferencias de los usuarios para generar sugerencias proactivas de alojamiento, transporte o rutas. El usuario podrá aceptar recomendaciones o ajustar parámetros para contribuir a su refinamiento.
+## Drivers
+RF-20/RF-21/RF-22; QA-P5/QA-E3; CRN-10; privacidad de datos personales.
 
 ## Alternativas consideradas
-- **Opción A:** sistema de recomendación.
-- **Opción B:** asistente virtual conversacional (chatbot).
+1. **Opción A:** sistema de recomendación personalizado.
+2. **Opción B:** asistente conversacional/chatbot.
 
-Se elige la Opción A como funcionalidad avanzada del alcance del sistema.
+## Decisión
+Seleccionar la **Opción A: sistema de recomendación**. Utilizará historial y preferencias autorizadas para producir sugerencias. El usuario puede aceptarlas o ajustar parámetros; las interacciones sirven como señal para evaluar y mejorar resultados.
 
 ## Consecuencias
-### Positivas
-- Personaliza sugerencias de viaje.
-- Aprovecha el historial y las preferencias para aportar valor.
-- Permite ajustar o mejorar recomendaciones mediante la interacción del usuario.
+**Beneficios:** personalización y una funcionalidad avanzada diferenciada.
 
-### Costos y cuestiones pendientes
-- Definir responsabilidades e interfaces del módulo.
-- Definir qué datos necesita y cómo accede a ellos.
-- Evaluar calidad y utilidad de las recomendaciones.
-- Considerar privacidad, rendimiento y evolución del módulo.
+**Costos/riesgos:** hay que definir acceso a datos, interfaz, evaluación de calidad, privacidad y comportamiento para usuarios sin historial. El algoritmo concreto se selecciona en el diseño del módulo/prototipo.
 
 ## Trazabilidad
-- Requisito avanzado, Opción A: Sistema de recomendación.
-- Requisito *human-in-the-loop*.
-- Requisitos aplicables de seguridad, privacidad y rendimiento.
+RF-20–RF-22; ADD-4; ADR-006/015.
