@@ -1,37 +1,27 @@
-# ADR-003: Uso de datos de viajes para analítica y mejora del servicio
+# ADR-003: Uso de datos de viaje para analítica y mejora del servicio
 
 - **Estado:** Aceptado
-- **Fecha:** 2026-10-15
+- **Fecha:** 2026-10-28
+- **Categoría:** Datos y privacidad
 
-## Contexto
-Trotamundos recopilará datos analíticos de viajes —tendencias, destinos y cancelaciones— para generar valor para el propio servicio y su negocio. El módulo de recomendación también utiliza el historial y las preferencias de los usuarios. El análisis puede requerir datos individuales, pero no implica que todo el equipo tenga acceso irrestricto a todos los datos personales.
+## Contexto y problema
+Trotamundos necesita analizar tendencias, destinos y cancelaciones. El recomendador también usa historial, preferencias e interacciones. La necesidad analítica no justifica acceso irrestricto a datos personales.
 
-## Decisión
-Trotamundos recopilará y procesará datos de viajes, reservas, preferencias e interacciones con recomendaciones para analítica del producto y mejora del servicio.
-
-El equipo de análisis podrá acceder a los datos individuales necesarios para sus tareas autorizadas, sujeto a controles de acceso. Cuando los datos agregados o desidentificados sean suficientes, se priorizarán para reducir la exposición de información personal.
-
-La monetización se interpreta como explotación analítica para el negocio de Trotamundos; esta decisión no implica vender datos personales.
+## Drivers
+RF-16/RF-20–RF-22; QA-P4 (aislamiento de consultas), QA-SE3 (acceso autorizado); CRN-07/08.
 
 ## Alternativas consideradas
-- Utilizar exclusivamente datos agregados o desidentificados.
-- Permitir acceso a datos individuales para tareas autorizadas y usar datos agregados o desidentificados cuando sean suficientes.
-- Permitir acceso irrestricto a todos los datos individuales.
+1. Utilizar exclusivamente datos agregados/desidentificados.
+2. Permitir datos individuales para tareas autorizadas y priorizar agregación/desidentificación cuando sea suficiente.
+3. Permitir acceso irrestricto a todos los datos individuales.
 
-Se elige la segunda alternativa para habilitar análisis individuales cuando sean necesarios sin conceder acceso indiscriminado.
+## Decisión
+Procesar datos de viajes, reservas, preferencias e interacciones para analítica del producto y mejora del servicio. El equipo analítico accede a datos individuales solo cuando sean necesarios para tareas autorizadas. Cuando los datos agregados o desidentificados alcancen, se priorizan. La monetización del producto no implica vender datos personales.
 
 ## Consecuencias
-### Positivas
-- Habilita el análisis de tendencias, destinos y cancelaciones.
-- Aporta información para evaluar y mejorar las recomendaciones.
-- Reconoce la necesidad de proteger datos personales y limitar el acceso.
+**Beneficios:** habilita análisis útiles y evaluación de recomendaciones.
 
-### Costos y cuestiones pendientes
-- Definir permisos, controles de acceso y trazabilidad.
-- Proteger los datos personales almacenados y procesados.
-- Definir políticas de conservación, desidentificación y acceso.
+**Costos/riesgos:** se requieren controles de acceso, auditoría, minimización, retención y reglas de consentimiento. La política final debe validarse según regiones y normativa aplicable.
 
 ## Trazabilidad
-- Requisito de analítica de datos de viajes.
-- Requisito de seguridad y privacidad.
-- Módulo avanzado de recomendación.
+RF-16/RF-20–RF-22; QA-P4/QA-SE3; ADD-4; ADR-014.
