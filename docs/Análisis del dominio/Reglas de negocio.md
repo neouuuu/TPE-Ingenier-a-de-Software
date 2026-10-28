@@ -1,6 +1,6 @@
 # Reglas de negocio
 
-Reglas del dominio que el sistema debe respetar, independientemente de cómo se diseñe. Las reglas RN-01 a RN-05 son las que cita el [ADR-007](../Architecture%20Decision%20Records/Surgidas%20en%20Captura%20de%20Requerimientos/ADR-007-gestion-de-reservas-y-viajes.md) y se deducen de sus decisiones.
+Reglas del dominio que el sistema debe respetar, independientemente de cómo se diseñe. Las reglas RN-01 a RN-05 son las que cita el [ADR-007](Architecture%20Decision%20Records/Surgidas%20en%20Captura%20de%20Requerimientos/ADR-007-gestion-de-reservas-y-viajes.md) y se deducen de sus decisiones.
 
 ## Asociación y organización de reservas
 
