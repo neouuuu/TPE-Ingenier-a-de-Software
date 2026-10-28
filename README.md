@@ -14,9 +14,7 @@ Las integraciones externas concretas siguen pendientes de validación: el diseñ
 
 ## Método de diseño
 
-Se utiliza **ADD (Attribute-Driven Design)**. Cada iteración identifica drivers arquitectónicos, selecciona elementos para refinar, evalúa alternativas, registra decisiones mediante ADR y produce vistas que describen la arquitectura resultante.
-
-Las cuatro iteraciones son el proceso de diseño arquitectónico. La etapa 5 es una validación previa al prototipo para comprobar APIs, permisos, cuotas, costos y contratos reales; no sustituye una iteración ADD.
+Se utiliza **ADD (Attribute-Driven Design)**. Las iteraciones 1 a 4 refinan la arquitectura a partir de sus drivers. La **iteración 5** concreta tecnologías y técnicas para un prototipo integrado de viabilidad, sin implicar que el stack sea definitivo para producción. La validación de APIs, permisos, cuotas, costos y contratos de terceros es una etapa previa separada.
 
 ## Documentación
 
@@ -45,9 +43,12 @@ Las cuatro iteraciones son el proceso de diseño arquitectónico. La etapa 5 es 
 - [ADD-2 — Componentes funcionales centrales](docs/ADD/02-Iteracion-2/Iteracion-2.md)
 - [ADD-3 — Disponibilidad, seguridad y resiliencia](docs/ADD/03-Iteracion-3/Iteracion-3.md)
 - [ADD-4 — Rendimiento, analítica y recomendaciones](docs/ADD/04-Iteracion-4/Iteracion-4.md)
-- [Etapa 5 — Validación de integraciones antes del prototipo](docs/ADD/05-Integraciones-pendientes.md)
+- [ADD-5 — Refinamiento de implementación y validación integrada](docs/ADD/05-Iteracion-5/Iteracion-5.md)
+- [Vista C&C del prototipo integrado](docs/ADD/05-Iteracion-5/Vistas/Vista-CyC-Prototipo.md)
+- [ADR-016 — Stack y técnicas del prototipo](docs/ADD/05-Iteracion-5/ADRs/ADR-016-stack-y-tecnicas-prototipo.md)
+- [Etapa previa — Validación de integraciones externas](docs/ADD/05-Integraciones-pendientes.md)
 
-Cada iteración incluye sus vistas arquitectónicas y ADR propios. Los diagramas describen decisiones propuestas; no constituyen evidencia de que las metas de calidad ya se hayan alcanzado.
+Cada iteración incluye vistas y ADR propios cuando corresponda. Los diagramas describen decisiones propuestas; no constituyen evidencia de que las metas de calidad ya se hayan alcanzado.
 
 ## Estructura del repositorio
 
@@ -56,31 +57,21 @@ Cada iteración incluye sus vistas arquitectónicas y ADR propios. Los diagramas
 ├── README.md
 └── docs/
     ├── Análisis del dominio/
-    │   ├── Resumen Sistema.md
-    │   ├── Requerimientos funcionales.md
-    │   ├── Reglas de negocio.md
-    │   ├── Diagrama de Contexto.md
-    │   ├── Diagrama Casos de Uso.png
-    │   ├── Descriptores Casos de Uso.md
     │   └── Architecture Decision Records/
-    │       ├── README.md
-    │       ├── Surgidas en Analisis Inicial/       # ADR-001 a ADR-006
-    │       └── Surgidas en Captura de Requerimientos/ # ADR-007
     ├── Drivers/
-    │   ├── Tabla de Drivers.md
-    │   ├── Escenarios QA.md
-    │   ├── Utility Tree.md
-    │   ├── Restricciones.md
-    │   └── Preocupaciones.md
     └── ADD/
         ├── 00-Plan de iteraciones ADD.md
-        ├── 01-Iteracion-1/  # Diseño de alto nivel, vistas y ADR-008/009
-        ├── 02-Iteracion-2/  # Componentes funcionales, vistas y ADR-010/011
-        ├── 03-Iteracion-3/  # Resiliencia/seguridad, vistas y ADR-012/013
-        ├── 04-Iteracion-4/  # Analítica/recomendaciones, vistas y ADR-014/015
+        ├── 01-Iteracion-1/
+        ├── 02-Iteracion-2/
+        ├── 03-Iteracion-3/
+        ├── 04-Iteracion-4/
+        ├── 05-Iteracion-5/
+        │   ├── Iteracion-5.md
+        │   ├── Vistas/Vista-CyC-Prototipo.md
+        │   └── ADRs/ADR-016-stack-y-tecnicas-prototipo.md
         └── 05-Integraciones-pendientes.md
 ```
 
 ## Estado actual
 
-La documentación define una arquitectura lógica, sus decisiones y los asuntos que siguen abiertos. Antes del prototipo deben verificarse las APIs de terceros, cerrar la política de acceso a enlaces compartidos, definir precedencia en conflictos entre fuentes y confirmar el alcance de despliegue, operación y pruebas de carga.
+La documentación define una arquitectura lógica y un diseño de prototipo para probar el flujo de reservas con eventos. Las integraciones reales, la política para eventos fuera de orden, la seguridad de enlaces compartidos y las pruebas representativas de escala/disponibilidad siguen requiriendo validación antes de producción.
