@@ -4,7 +4,6 @@
 flowchart TB
     U["Usuario"]
     T["TROTAMUNDOS<br/>Planificación, organización y compartición de viajes"]
-
     E["Proveedor de correo"]
     D["Destinatario del itinerario"]
     P["Proveedores turísticos<br/>(aerolíneas, hoteles, transporte, etc.)"]
@@ -15,34 +14,24 @@ flowchart TB
 
     U -->|"Gestiona viajes, reservas y preferencias"| T
     T -->|"Itinerarios, recomendaciones y notificaciones"| U
-
-    E -->|"Entrega o notifica correos nuevos<br/>(mecanismo por definir)"| T
+    E -->|"Notificaciones/webhooks si están disponibles"| T
     T -->|"Solicita acceso autorizado a correos"| E
-
-    T -->|"Envía enlace seguro al itinerario"| D
-    D -->|"Solicita acceso al itinerario"| T
-
+    T -->|"Envía enlace seguro de solo lectura"| D
+    D -->|"Solicita visualizar itinerario"| T
     T -->|"Consulta reservas y disponibilidad"| P
-    P -->|"Información de reservas, actualizaciones y cancelaciones"| T
-
+    P -->|"Detalles, actualizaciones y cancelaciones"| T
     T -->|"Consulta ubicaciones, rutas y estimaciones"| M
-    M -->|"Información geográfica y estimaciones de distancia y duración"| T
-
-    T -->|"Solicita publicar el itinerario elegido"| R
-
-    T -->|"Datos de viajes, reservas, preferencias e interacciones para análisis y mejora"| A
-
-    T -.->|"Facilita datos de contacto de la agencia al usuario"| U
-    U -.->|"Se comunica externamente para solicitar asistencia"| AG
+    M -->|"Mapas y datos de rutas"| T
+    T -->|"Solicita publicar itinerario elegido"| R
+    T -->|"Datos autorizados para análisis"| A
+    T <-->|"Integración técnica por API, si está disponible"| AG
 ```
 
 ## Notas sobre el alcance
-
-- El acceso al correo requiere autorización del usuario, que puede revocar en cualquier momento (RF-17, RF-18; CU-17).
-- La forma de obtener los correos nuevos (consulta periódica de Trotamundos o notificación del proveedor) queda **pendiente de diseño**: los requisitos RF-07 y RF-13 no fijan el mecanismo. Se decidirá durante el ADD.
-- Trotamundos notifica al usuario los cambios relevantes en sus reservas (RF-19; CU-18). Los canales concretos quedan pendientes de diseño.
-- Los enlaces compartidos deben restringir el acceso a los destinatarios designados. La autorización, caducidad y revocación quedan pendientes de diseño.
-- Las consultas a proveedores turísticos no implican que Trotamundos realice reservas automáticamente.
-- El equipo de análisis accede a los datos necesarios para sus tareas autorizadas. Se priorizan datos agregados o desidentificados cuando sean suficientes. Es el actor del caso de uso CU-12.
-- La agencia no tiene integración técnica directa con Trotamundos: el usuario se comunica con ella por fuera del sistema.
-- Las capacidades concretas de los proveedores externos quedan pendientes de selección y validación.
+- El usuario autoriza y puede revocar el acceso al correo (RF-17/RF-18).
+- Se prefieren notificaciones/webhooks de correo y proveedores turísticos cuando existan; la consulta periódica queda como alternativa según la API y sus cuotas.
+- Los enlaces compartidos son de solo lectura; el destinatario puede no tener cuenta. Caducidad, revocación y verificación del destinatario deben definirse antes del prototipo.
+- Las consultas a proveedores no implican que Trotamundos efectúe reservas automáticamente.
+- El equipo de análisis solo accede a los datos necesarios para tareas autorizadas; se priorizan datos agregados/desidentificados cuando sean suficientes.
+- RF-15 se diseña como integración técnica directa con la agencia preferida. La existencia y capacidad de la API quedan pendientes de validación en la etapa 5; no se asume que exista.
+- Las APIs y proveedores concretos siguen pendientes de selección y validación.
