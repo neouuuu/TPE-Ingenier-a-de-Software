@@ -80,3 +80,21 @@ Documentos: [Escenarios QA](Escenarios%20QA.md) · [Utility Tree](Utility%20Tree
 | ADD-4 | Lecturas, analítica, recomendaciones y UX. | QA-P2/P3/P4/P5, QA-E3, QA-U1/U2/U3, RF-16, RF-20–RF-24. |
 
 Los requisitos funcionales no listados como drivers siguen vigentes. La priorización no autoriza a descartarlos.
+
+
+## 6. Escenarios complementarios y requisitos vigentes no seleccionados como drivers independientes
+
+Estos elementos siguen siendo obligatorios. Se resuelven dentro de las estructuras y mecanismos anteriores o requieren decisiones locales, sin constituir un objetivo arquitectónico independiente en el estado actual.
+
+| ID | Descripción | Tratamiento |
+|---|---|---|
+| QA-A2 | Si falla un proveedor de viajes/correo, la aplicación continúa sirviendo y resincroniza cuando se recupera. | Se aborda junto con QA-A1 mediante aislamiento de fallas, timeouts, colas y reintentos; ver ADD-3/ADR-012. |
+| QA-A3 | Despliegues sin interrupción. | Se evalúa como táctica operativa ligada a disponibilidad; el mecanismo de despliegue queda pendiente de infraestructura. |
+| QA-A4 | La falla del servicio de mapas no impide consultar el itinerario. | Fallback y aislamiento del adaptador de mapas; proveedor pendiente en etapa 5. |
+| RF-02/RF-03/RF-04 | Registrar, actualizar y eliminar reservas manualmente. | Se implementan dentro del servicio de reservas definido en ADD-2; política de eliminación pendiente. |
+| RF-06 | Archivar o retirar de la vista principal los viajes completados. | Se implementa en el servicio de viajes; definición de “completado” pendiente. |
+| RF-09/RF-10 | Configurar filtros y remitentes confiables. | Se resuelve dentro del flujo de ingesta y la configuración por usuario. |
+| QA-SE4 | No conservar correos irrelevantes más allá de lo necesario. | Regla de minimización/retención en el procesamiento de correo; plazo concreto pendiente. |
+| QA-U1/U2 | GPS, experiencia móvil e internacionalización. | Se contemplan en ADD-4; modo offline e idiomas objetivo requieren validación. |
+
+La ausencia de un requisito en la tabla de drivers seleccionados **no significa que pueda omitirse del análisis o del prototipo**. La selección solo identifica qué necesidades guían decisiones de arquitectura.
