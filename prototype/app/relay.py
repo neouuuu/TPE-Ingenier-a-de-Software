@@ -3,7 +3,7 @@ from datetime import datetime, timezone
 import pika
 from sqlalchemy import select
 from app.config import RABBITMQ_URL, RABBITMQ_QUEUE
-from app.db import SessionLocal, init_db
+from app.db import SessionLocal
 from app.models import OutboxEvent
 
 def publish_pending():
@@ -30,7 +30,6 @@ def publish_pending():
         connection.close()
 
 def main():
-    init_db()
     while True:
         try:
             publish_pending()
