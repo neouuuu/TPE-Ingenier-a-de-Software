@@ -1,35 +1,27 @@
-# ADR-004: Integración con un servicio externo de mapas y navegación
+# ADR-004: Integración con servicio externo de mapas y rutas
 
 - **Estado:** Aceptado
-- **Fecha:** 2026-10-15
+- **Fecha:** 2026-10-28
+- **Categoría:** Integración externa
 
-## Contexto
-Trotamundos debe ofrecer una interfaz rica y aprovechar capacidades nativas de dispositivos móviles, como el GPS. El módulo de recomendación también puede sugerir alternativas de rutas. Se decidió utilizar un servicio externo de mapas para obtener información geográfica y asistir en la consulta y cálculo de rutas.
+## Contexto y problema
+Trotamundos debe ofrecer experiencia móvil contextual y puede sugerir rutas. El GPS del dispositivo obtiene ubicación; no reemplaza mapas, geocodificación ni cálculo de rutas.
 
-## Decisión
-Trotamundos se integrará con un servicio externo de mapas y navegación para consultar ubicaciones, rutas y estimaciones de distancia o duración. El proveedor concreto aún no está seleccionado.
-
-El GPS del dispositivo y el servicio externo son capacidades distintas: el GPS puede proporcionar la ubicación del dispositivo, mientras que el servicio puede aportar mapas, datos geográficos y cálculo de rutas.
+## Drivers
+Experiencia móvil/GPS; RF-21; QA-U1; disponibilidad de servicios externos; CRN-11.
 
 ## Alternativas consideradas
-- Desarrollar internamente mapas y cálculo de rutas.
-- Integrarse con un servicio externo especializado.
-- Utilizar únicamente la ubicación GPS sin un servicio externo de mapas o rutas.
+1. Desarrollar mapas y cálculo de rutas propios.
+2. Integrar un servicio externo especializado.
+3. Usar solo GPS, sin mapas ni cálculo de rutas.
 
-Se elige la integración externa para aprovechar capacidades especializadas y evitar desarrollar toda esa funcionalidad desde cero.
+## Decisión
+Integrar un servicio externo de mapas/rutas detrás de un puerto y adaptador. El proveedor se seleccionará durante la etapa 5 tras comparar cobertura, funciones, costo, límites, atribución, privacidad y términos.
 
 ## Consecuencias
-### Positivas
-- Incorpora información geográfica y rutas a la experiencia de viaje.
-- Puede apoyar las recomendaciones de rutas.
-- Reduce la necesidad de implementar internamente todas las capacidades cartográficas.
+**Beneficios:** se aprovechan capacidades geográficas especializadas y se reduce desarrollo propio.
 
-### Costos y cuestiones pendientes
-- Dependencia de la disponibilidad, latencia, límites de uso y condiciones del proveedor.
-- Definir el comportamiento cuando el servicio no esté disponible.
-- Seleccionar proveedor y especificar su API.
-- Considerar permisos y protección de datos al usar la ubicación del usuario.
+**Costos/riesgos:** dependencia de latencia, disponibilidad, cuotas y condiciones del proveedor. Se debe definir fallback y proteger datos de ubicación. La consulta del itinerario no debe fallar si mapas no está disponible.
 
 ## Trazabilidad
-- Requisito de interfaz rica y capacidades nativas como GPS.
-- Funcionalidad de recomendación de rutas.
+RF-21; QA-U1; ADD-4; etapa 5 de integraciones.
