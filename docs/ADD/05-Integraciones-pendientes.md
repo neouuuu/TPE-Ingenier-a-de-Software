@@ -1,8 +1,8 @@
-# Etapa 5 — Validación de integraciones antes del prototipo
+# Etapa previa al prototipo — Validación de integraciones externas
 
 - **Estado:** pendiente de evidencia externa.
 - **Propósito:** convertir los puertos en contratos implementables sin inventar capacidades de terceros.
-- **Nota:** esta etapa no reemplaza las cuatro iteraciones ADD.
+- **Nota:** esta es una etapa de preparación, no una iteración ADD. ADD-5 es el refinamiento de implementación del sistema y del prototipo integrado.
 
 | Integración | Preferencia | Validaciones obligatorias |
 |---|---|---|
