@@ -8,13 +8,14 @@
 | [ADD-2](02-Iteracion-2/Iteracion-2.md) | Componentes de funcionalidad central | Viajes/reservas, ingesta, adaptadores, identidad y notificaciones |
 | [ADD-3](03-Iteracion-3/Iteracion-3.md) | Disponibilidad, escala, seguridad e interoperabilidad | Resiliencia, idempotencia, permisos, monitoreo |
 | [ADD-4](04-Iteracion-4/Iteracion-4.md) | Rendimiento, analítica, recomendación y experiencia | Proyecciones de lectura, almacén analítico, contrato del recomendador |
-| [Etapa previa al prototipo](05-Integraciones-pendientes.md) | Validar APIs, cuotas y permisos reales | Contratos implementables y limitaciones documentadas |
+| [ADD-5](05-Iteracion-5/Iteracion-5.md) | Refinamiento de implementación y validación integrada del sistema | Stack concreto del prototipo, flujo de reservas, Outbox, RabbitMQ, Inbox, CQRS, HMAC, DLQ y pruebas |
+| [Etapa previa al prototipo](05-Integraciones-pendientes.md) | Validar APIs, cuotas y permisos reales antes de comprometer integraciones externas | Contratos implementables y limitaciones documentadas |
 
-La etapa 5 complementa, pero no reemplaza, las cuatro iteraciones ADD. El README del repositorio no forma parte de este cambio.
+ADD-5 concreta una implementación de prototipo a partir del diseño anterior. La validación de integraciones externas sigue siendo una etapa de preparación separada; no se asume que el simulador pruebe capacidades de proveedores reales.
 
 ## Reglas
 
-Cada iteración identifica objetivo, entradas, drivers, elemento a refinar, alternativas, decisiones, estructura, vistas, ADR, evaluación y siguientes pasos. Las vistas representan diseño propuesto; no demuestran por sí mismas disponibilidad o escala. Se distinguen metas del enunciado de supuestos de dimensionamiento.
+Cada iteración identifica objetivo, entradas, drivers, elemento a refinar, alternativas, decisiones, estructura, vistas, ADR, evaluación y siguientes pasos. Las vistas representan diseño propuesto; no demuestran por sí mismas disponibilidad o escala. Se distinguen metas del enunciado de supuestos de dimensionamiento. Las tecnologías concretas de ADD-5 se consideran decisiones del prototipo y se revisan si la evidencia lo requiere.
 
 ## Drivers principales
 
