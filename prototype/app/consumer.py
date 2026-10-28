@@ -1,7 +1,6 @@
 import json, time
 from datetime import datetime, timezone
 import pika
-from sqlalchemy import select
 from sqlalchemy.dialects.postgresql import insert as pg_insert
 from app.config import RABBITMQ_URL, RABBITMQ_QUEUE, RABBITMQ_DLQ
 from app.db import SessionLocal
@@ -11,10 +10,8 @@ def connect():
     connection = pika.BlockingConnection(pika.URLParameters(RABBITMQ_URL))
     channel = connection.channel()
     channel.queue_declare(queue=RABBITMQ_DLQ, durable=True)
-    channel.queue_declare(queue=RABBITMQ_QUEUE, durable=True, arguments={
-        "x-dead-letter-exchange": "",
-        "x-dead-letter-routing-key": RABBITMQ_DLQ,
-    })
+    # The relay declares this queue without arguments, so keep declarations identical.
+    channel.queue_declare(queue=RABBITMQ_QUEUE, durable=True)
     channel.basic_qos(prefetch_count=1)
     return connection, channel
 
@@ -46,7 +43,7 @@ def main():
                 if ok:
                     ch.basic_ack(method.delivery_tag)
                 else:
-                    # Reintentos limitados; el broker enruta a DLQ tras el límite.
+                    # Reintentos limitados y envío explícito a la DLQ.
                     headers = properties.headers or {}
                     count = int(headers.get("x-retry-count", 0))
                     if count >= 3:
